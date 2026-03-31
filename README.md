@@ -1,7 +1,9 @@
 # Bootly - Android Image Workstation 🚀
 
 Bootly is a modern, professional toolkit for managing, unpacking, and repacking Android boot and recovery images. It features a high-fidelity glassmorphism GUI, smart workspace exploration, and a suite of developer-focused tools built on PyQt6.
+
 ![Bootly Mockup](https://github.com/Haris16-code/Bootly/blob/main/data/bootly_gui_mockup_1774961494950.png)
+
 ## ✨ Features
 - **High-Fidelity GUI**: Modern PyQt6 interface with a professional dark mode and fluid animations.
 - **Smart Workspace**: Manage raw images and unpacked projects in a fluid grid-based explorer.
