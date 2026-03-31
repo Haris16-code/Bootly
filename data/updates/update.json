@@ -1,6 +1,6 @@
 {
   "latest_version": "1.0",
   "release_notes": "<ul><li><b>New:</b> Added responsive fluid matrices.</li><li><b>New:</b> Smart Search UI integrated.</li><li><b>Fixed:</b> Repack threading crash stabilized.</li></ul>",
-  "binary_url": "https://example.com/downloads/Bootly.exe",
-  "source_url": "https://example.com/downloads/bootly-source.zip"
+  "binary_url": "",
+  "source_url": ""
 }
