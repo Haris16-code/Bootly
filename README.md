@@ -74,7 +74,6 @@ Bootly is a modern, professional toolkit for managing, unpacking, and repacking 
 
 ## 🤝 Contributing
 Bootly is an open-source project. We welcome contributions, bug reports, and suggestions!
-**GitHub Repository**: [https://github.com/Haris16-code/Bootly](https://github.com/Haris16-code/Bootly)
 
 ## 📄 Credits
 - **Developed by**: Haris
