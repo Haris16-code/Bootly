@@ -1,0 +1,6 @@
+{
+  "latest_version": "1.1",
+  "release_notes": "Added Smart Search UI capabilities to the Knowledge Base.\nAdded responsive fluid matrices to the Explorer grid.\nImproved extraction speed metrics.",
+  "binary_url": "https://example.com/downloads/Bootly.exe",
+  "source_url": "https://example.com/downloads/bootly-source.zip"
+}
