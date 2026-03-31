@@ -1,1 +1,16 @@
-
+{
+  "version": "1.0",
+  "last_updated": "2026-03-31",
+  "articles": [
+    {
+      "question": "What is multiple compression repacking?",
+      "answer": "Bootly dynamically detects and supports gz, xz, lzma, bz2, lz4, and lzo ramdisk compressions seamlessly.",
+      "tags": ["repack", "compression"]
+    },
+    {
+      "question": "Why does Repack fail with 'mkbootimg error'?",
+      "answer": "This happens if your kernel or ramdisk files are missing from the folder. Ensure you didn't accidentally delete critical core files.",
+      "tags": ["error", "repack", "troubleshoot"]
+    }
+  ]
+}
