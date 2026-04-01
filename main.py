@@ -27,7 +27,6 @@ CARD_BORDER = "#1f2024"
 TEXT_PRIMARY = "#f3f4f6"
 TEXT_SECONDARY = "#9ca3af"
 
-# REPLACE THIS WITH YOUR ACTUAL GITHUB RAW URL LATER
 HELP_DOC_URL = "https://raw.githubusercontent.com/username/repo/main/bootly_help.json"
 
 class SidebarBtn(QPushButton):
