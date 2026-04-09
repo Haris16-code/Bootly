@@ -25,7 +25,7 @@ Bootly is a modern, professional toolkit for managing, unpacking, and repacking 
 
 ## 🚀 Running Guide
 
-### 🪟 Windows (Recommended)
+### ⊞ Windows (Recommended)
 1. **From Standalone EXE**:
    - Download the latest `Bootly.exe` from the [Releases](https://github.com/Haris16-code/Bootly/releases) page.
    - Simply run the EXE. (Make sure the `bin/` folder is in the same directory).
@@ -84,7 +84,6 @@ For technical insights into Bootly's core architecture, UI logic, and offline ex
 
 ## 🤝 Contributing
 Bootly is an open-source project. We welcome contributions, bug reports, and suggestions!
-**GitHub Repository**: [https://github.com/Haris16-code/Bootly](https://github.com/Haris16-code/Bootly)
 
 ## 📄 Credits
 - **Developed by**: Haris
