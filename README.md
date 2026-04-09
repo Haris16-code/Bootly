@@ -2,14 +2,19 @@
 
 Bootly is a modern, professional toolkit for managing, unpacking, and repacking Android boot and recovery images. It features a high-fidelity glassmorphism GUI, smart workspace exploration, and a suite of developer-focused tools built on PyQt6.
 
+![Bootly Mockup](https://github.com/Haris16-code/Bootly/blob/main/data/bootly_gui_mockup_1774961494950.png)
+
 ## ✨ Features
-- **High-Fidelity GUI**: Modern PyQt6 interface with a professional dark mode and fluid animations.
-- **Smart Workspace**: Manage raw images and unpacked projects in a fluid grid-based explorer.
-- **Visual Metadata Parser**: Real-time extraction and visualization of image structures (Kernel, Ramdisk, OS version, Header).
-- **Auto-Updater**: Built-in engine for both standalone binary (.exe) and source code updates.
+- **Unpack & Repack Boot Image**: Seamlessly single-click extract and rebuild Android boot/recovery images into clean directories.
+- **Image Restore**: Built-in functionality to securely revert any workspace modifications back to the original unmodified factory image.
+- **Security Bypass**: Automated VBMeta logic patching to permanently disable bootloader `dm-verity` and AVB flags during repacks.
+- **AVB Master Tool Suite**: Full GUI integration of `avbtool.py` for standalone VBMeta generation, hash footer appending, custom cryptographic signing (RSA), and partition verification.
+- **High-Fidelity GUI**: Modern PyQt6 interface with a premium dark mode, unified styling, and fluid responsive toolcards.
+- **Smart Workspace**: Manage raw images and unpacked projects in a fluid grid-based explorer complete with intelligent conflict resolution (Replace/Rename protection).
+- **Visual Metadata Parser**: Real-time extraction and visualization of deep image structures (Kernel, Ramdisk, OS version, Header).
+- **Cross-Platform Auto-Updater**: Built-in release check engine supporting both pre-compiled Standalone Binaries (.exe) and source code deployment structures.
 - **Responsive Knowledge Base**: Searchable manual with real-time keyword highlighting.
-- **Email Updates**: Direct subscription to software updates via a native, secure form.
-- **Privacy-First Analytics**: Anonymous usage and error telemetry via GA4 (no sensitive data collected).
+- **Privacy-First Analytics**: Anonymous usage and error telemetry via secure GA4 implementation (no sensitive data collected).
 
 ## 🛠️ Prerequisites
 - **Python 3.10+** (if running from source)
@@ -69,6 +74,11 @@ Bootly is a modern, professional toolkit for managing, unpacking, and repacking 
 - `bin/`: Contains the binary tools for Android image manipulation.
 - `input/`: Recommended directory for raw images.
 - `output/`: Default directory for repacked images.
+
+---
+
+## 📚 Developer Documentation
+For technical insights into Bootly's core architecture, UI logic, and offline execution engine, check out the [Bootly Developers Guide](Documentation/Developers_Guide.md).
 
 ---
 

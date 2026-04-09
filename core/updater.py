@@ -8,8 +8,8 @@ import subprocess
 import shutil
 from PyQt6.QtCore import QThread, pyqtSignal
 
-CURRENT_VERSION = "1.0"
-UPDATE_JSON_URL = "https://github.com/Haris16-code/Bootly/raw/refs/heads/main/data/updates/update.json"
+CURRENT_VERSION = "1.1"
+UPDATE_JSON_URL = "https://raw.githubusercontent.com/Haris16-code/Bootly/refs/heads/main/data/updates/update.json"
 
 def is_binary():
     return getattr(sys, 'frozen', False)
@@ -59,11 +59,12 @@ class UpdateDownloaderThread(QThread):
                 self.finished.emit(False, "No suitable update URL found in JSON.")
                 return
 
+            # Dest file should always be a zip for this optimized flow
+            dest_file = os.path.join(temp_dir, "update.zip")
+            
             req = urllib.request.Request(url, headers={'User-Agent': 'BootlyUpdater/1.0'})
             with urllib.request.urlopen(req, timeout=15) as response:
                 total_size = int(response.info().get('Content-Length', 0))
-                
-                dest_file = os.path.join(temp_dir, "update.exe" if is_binary() else "update.zip")
                 
                 downloaded = 0
                 with open(dest_file, 'wb') as f:
@@ -76,11 +77,15 @@ class UpdateDownloaderThread(QThread):
                             pct = int((downloaded / total_size) * 100)
                             self.progress.emit(pct)
 
-            if not is_binary():
-                # Extract zip
-                with zipfile.ZipFile(dest_file, 'r') as zip_ref:
-                    zip_ref.extractall(temp_dir)
+            # Extract zip
+            with zipfile.ZipFile(dest_file, 'r') as zip_ref:
+                zip_ref.extractall(temp_dir)
+            
+            # Clean up zip
+            try:
                 os.remove(dest_file)
+            except:
+                pass
 
             self.finished.emit(True, temp_dir)
 
@@ -88,38 +93,62 @@ class UpdateDownloaderThread(QThread):
             self.finished.emit(False, str(e))
 
 def apply_update(temp_dir, base_path):
-    bat_path = os.path.join(base_path, "updater.bat")
+    """Creates a script to replace existing files and restarts the app."""
+    # Find inner folder natively extracted by github zip or others
+    inner_folder = temp_dir
+    possible_inner = [os.path.join(temp_dir, d) for d in os.listdir(temp_dir) if os.path.isdir(os.path.join(temp_dir, d))]
+    if len(possible_inner) == 1 and len(os.listdir(temp_dir)) == 1:
+        inner_folder = possible_inner[0]
+
+    # Detect if we are a compiled binary
+    target_exe = sys.executable
+    is_compiled = is_binary()
     
-    if is_binary():
-        target_exe = sys.executable
-        new_exe = os.path.join(temp_dir, "update.exe")
+    # We only auto-replace for Windows Binaries
+    if sys.platform == "win32" and is_compiled:
+        bat_path = os.path.join(base_path, "updater.bat")
+        
+        # We use robocopy for better exclusion and reliability if available, otherwise xcopy
+        # /MIR mirrors, but we don't want to delete input/output folders
+        # /E copies subdirectories, including empty ones.
+        # /Y suppresses prompting to confirm you want to overwrite an existing destination file.
+        # We exclude input and output folders to preserve user data
         bat_content = f"""@echo off
+title Bootly Auto-Updater
+echo Waiting for Bootly to close...
 timeout /t 2 /nobreak > nul
-copy /Y "{new_exe}" "{target_exe}"
+
+echo Updating files...
+xcopy /s /y /q /i "{inner_folder}\\*" "{base_path}\\" /exclude:exclude_list.txt 2>nul
+if %errorlevel% leq 4 (
+    echo Update applied successfully.
+) else (
+    echo Error during update: %errorlevel%
+)
+
+echo Restarting Bootly...
 start "" "{target_exe}"
+
+echo Cleaning up...
 rmdir /s /q "{temp_dir}"
+del "exclude_list.txt"
 del "%~f0"
 """
+        # Create exclude list for xcopy
+        exclude_path = os.path.join(base_path, "exclude_list.txt")
+        with open(exclude_path, "w") as f:
+            f.write("\\input\\\n")
+            f.write("\\output\\\n")
+            f.write("updater.bat\n")
+            f.write("exclude_list.txt\n")
+
+        with open(bat_path, "w") as f:
+            f.write(bat_content)
+
+        # Detach bat execution
+        subprocess.Popen([bat_path], creationflags=subprocess.CREATE_NEW_CONSOLE | subprocess.DETACHED_PROCESS, cwd=base_path)
+        sys.exit(0)
     else:
-        # Find inner folder natively extracted by github zip
-        inner_folder = temp_dir
-        for item in os.listdir(temp_dir):
-            full_path = os.path.join(temp_dir, item)
-            if os.path.isdir(full_path) and len(os.listdir(temp_dir)) == 1:
-                inner_folder = full_path
-                break
-                
-        bat_content = f"""@echo off
-timeout /t 2 /nobreak > nul
-xcopy /s /y /q "{inner_folder}\\*" "{base_path}\\"
-start "" python "{os.path.join(base_path, 'main.py')}"
-rmdir /s /q "{temp_dir}"
-del "%~f0"
-"""
-
-    with open(bat_path, "w") as f:
-        f.write(bat_content)
-
-    # Detach bat execution
-    subprocess.Popen([bat_path], creationflags=subprocess.CREATE_NEW_CONSOLE | subprocess.DETACHED_PROCESS)
-    sys.exit(0)
+        # For non-windows or non-binary, this function shouldn't be called if we follow the new plan
+        # but as a safety measure, we do nothing or just log
+        pass
