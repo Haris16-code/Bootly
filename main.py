@@ -703,10 +703,10 @@ class UpdateDialog(QDialog):
         is_compiled = is_binary()
         
         if is_compiled:
-            self.btn_install = QPushButton("Download && Install")
+            self.btn_install = QPushButton("Download Update")
             self.btn_install.setCursor(Qt.CursorShape.PointingHandCursor)
             self.btn_install.setStyleSheet("background-color: #3b82f6; color: white; padding: 10px 20px; border-radius: 6px; font-weight: bold; border: none;")
-            self.btn_install.clicked.connect(self.start_download)
+            self.btn_install.clicked.connect(self.open_exe_link)
             
             self.btn_cancel = QPushButton("Cancel")
             self.btn_cancel.setCursor(Qt.CursorShape.PointingHandCursor)
@@ -723,7 +723,7 @@ class UpdateDialog(QDialog):
             btn_lay.addWidget(lbl_source)
             btn_lay.addStretch()
             
-            self.btn_github = QPushButton("Open GitHub (Browser)")
+            self.btn_github = QPushButton("View on GitHub ↗")
             self.btn_github.setCursor(Qt.CursorShape.PointingHandCursor)
             self.btn_github.setStyleSheet("background-color: #4ade80; color: #064e3b; padding: 10px 20px; border-radius: 6px; font-weight: bold; border: none;")
             self.btn_github.clicked.connect(self.open_github_link)
@@ -741,6 +741,14 @@ class UpdateDialog(QDialog):
     def open_github_link(self):
         url = self.data.get("source_url", "https://github.com/Haris16-code/Bootly")
         QDesktopServices.openUrl(QUrl(url))
+        self.accept()
+
+    def open_exe_link(self):
+        url = self.data.get("binary_url")
+        if url:
+            QDesktopServices.openUrl(QUrl(url))
+        else:
+            QMessageBox.critical(self, "Error", "Binary URL not found.")
         self.accept()
 
     def start_download(self):
