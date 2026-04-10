@@ -64,3 +64,5 @@ Because Bootly acts as a generalized tool, finding exact dependencies dynamicall
 4. Spawns system python targeting the internal `/bin/scripts/avbtool.py` script.
 5. Issues command: `patch_vbmeta --flags 2` directly onto the local output files to forcibly override verification bits.
 6. Passes STDOUT cleanly to PyQt UI via Thread Signal Slots. Emits final `[SUCCESS]` directly to the user dashboard.
+
+---
