@@ -35,7 +35,6 @@ Bootly is a modern, professional toolkit for managing, unpacking, and repacking 
    - Launch: `python main.py`
 
 ### 🐧 Linux
-*Note: Bootly's core logic is cross-platform, but the image processing tools in `/bin` are currently Windows-based. Linux users will need to replace the files in `/bin` with Linux-compatible binaries.*
 1. Install system dependencies:
    ```bash
    sudo apt update
@@ -51,7 +50,6 @@ Bootly is a modern, professional toolkit for managing, unpacking, and repacking 
    ```
 
 ### 🍎 macOS
-*Note: MacOS users will need to provide native image processing tools in the `/bin` directory and install the following dependencies.*
 1. Open Terminal in project root.
 2. Install dependencies:
    ```bash
