@@ -80,6 +80,14 @@ For technical insights into Bootly's core architecture, UI logic, and offline ex
 
 ---
 
+## Bootly Community
+
+Join the development community, share feedback, and collaborate with other Android modding developers:
+
+**Join Community:** https://bootly.harislab.tech
+
+---
+
 ## 🤝 Contributing
 Bootly is an open-source project. We welcome contributions, bug reports, and suggestions!
 
