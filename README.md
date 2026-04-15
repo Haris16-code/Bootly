@@ -6,16 +6,14 @@ Bootly is a modern, professional toolkit for managing, unpacking, and repacking 
 
 ## ✨ Features
 - **Unpack & Repack Boot Image**: Seamlessly single-click extract and rebuild Android boot/recovery images into clean directories.
-- **Image Restore**: Built-in functionality to securely revert any workspace modifications back to the original unmodified factory image.
-- **Security Bypass**: Automated VBMeta logic patching to permanently disable bootloader `dm-verity` and AVB flags during repacks.
+- **Root Your Phone (Experimental)**: High-performance one-click automatic rooting suite and manual patching for local `boot.img` files.
+- **Patch Boot Image**: Integrated Magisk-based patching workflow for effortless rooting.
+- **DAT to IMG Builder**: Rapidly convert sparse Android DAT images into raw system images.
 - **AVB Master Tool Suite**: Full GUI integration of `avbtool.py` for standalone VBMeta generation, hash footer appending, custom cryptographic signing (RSA), and partition verification.
-- **High-Fidelity GUI**: Modern PyQt6 interface with a premium dark mode, unified styling, and fluid responsive toolcards.
-- **Smart Workspace**: Manage raw images and unpacked projects in a fluid grid-based explorer complete with intelligent conflict resolution (Replace/Rename protection).
+- **High-Fidelity GUI**: Modern PyQt6 interface with a premium dark mode, glassmorphism aesthetics, and fluid responsive toolcards.
+- **Smart Workspace**: Manage raw images and unpacked projects in a fluid grid-based explorer complete with intelligent conflict resolution.
 - **Visual Metadata Parser**: Real-time extraction and visualization of deep image structures (Kernel, Ramdisk, OS version, Header).
-- **Cross-Platform Auto-Updater**: Built-in release check engine supporting both pre-compiled Standalone Binaries (.exe) and source code deployment structures.
-- **Responsive Knowledge Base**: Searchable manual with real-time keyword highlighting.
-- **Privacy-First Analytics**: Anonymous usage and error telemetry via secure GA4 implementation (no sensitive data collected).
-
+- **Responsive Knowledge Base**: Searchable manual with premium typography and real-time keyword highlighting.
 ## 🛠️ Prerequisites
 - **Python 3.10+** (if running from source)
 - **Pip** (Python package manager)
