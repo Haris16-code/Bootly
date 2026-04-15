@@ -1,6 +1,6 @@
 {
-  "latest_version": "1.1",
-  "release_notes": "<ul><li><b>Please download this update manually from GitHub, as the in-app updater may not function properly in this version.</b></li><li><b>MAJOR:</b> Introduced Bootloader Security Bypass for automatic dm-verity disarming.</li><li><b>MAJOR:</b> AVB Master Tool Suite added for cryptographic signing, verification, and Custom VBMeta Generation.</li><li><b>New:</b> Intelligent custom workspace naming with integrated conflict resolution.</li><li><b>Fixed:</b> Repack Threading issues stabilized.</li></ul>",
-  "binary_url": "https://github.com/Haris16-code/Bootly/releases/download/v1.1/Bootly-v1.1-windows-x64.zip",
-  "source_url": "https://github.com/Haris16-code/Bootly/archive/refs/tags/v1.1.zip"
+  "latest_version": "1.0",
+  "release_notes": "<ul><li><b>MAJOR:</b> Introduced God-Tier Bootloader Security Bypass for automatic dm-verity disarming.</li><li><b>MAJOR:</b> AVB Master Tool Suite added for cryptographic signing, verification, and Custom VBMeta Generation.</li><li><b>New:</b> Intelligent custom workspace naming with integrated conflict resolution.</li><li><b>Fixed:</b> Repack Threading issues stabilized.</li></ul>",
+  "binary_url": "https://example.com/downloads/Bootly.exe",
+  "source_url": "https://example.com/downloads/bootly-source.zip"
 }

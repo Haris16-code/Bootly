@@ -4,6 +4,7 @@ import threading
 import urllib.parse
 import urllib.request
 import time
+import json
 
 GA4_MEASUREMENT_ID = "G-34X5FX8JKQ"
 GA4_ENDPOINT = "https://www.google-analytics.com/g/collect"
@@ -23,26 +24,67 @@ class AnalyticsManager:
 
     def __init__(self, base_path):
         self.base_path = base_path
-        self.client_id = self._get_or_create_client_id()
+        self.config_file = os.path.join(self.base_path, '.bootly_id')
+        self.config = self._load_config()
+        self.client_id = self.config.get("client_id")
         self.session_id = str(int(time.time()))
         
-    def _get_or_create_client_id(self):
-        id_file = os.path.join(self.base_path, '.bootly_id')
+    def _load_config(self):
+        """Loads or initializes the configuration dictionary."""
+        config = {
+            "client_id": str(uuid.uuid4()), 
+            "accepted_warning": False,
+            "root_warning_accepted": False
+        }
+        
         try:
-            if os.path.exists(id_file):
-                with open(id_file, 'r') as f:
-                    return f.read().strip()
-        except:
+            if os.path.exists(self.config_file):
+                with open(self.config_file, 'r') as f:
+                    content = f.read().strip()
+                    if content:
+                        try:
+                            # Try parsing as JSON
+                            loaded = json.loads(content)
+                            if isinstance(loaded, dict):
+                                config.update(loaded)
+                                return config
+                        except json.JSONDecodeError:
+                            # Legacy plain string UUID support
+                            if len(content) > 30: # Likely a UUID
+                                config["client_id"] = content
+                                self._save_config(config) # Migrate to JSON
+                                return config
+        except Exception:
             pass
             
-        new_id = str(uuid.uuid4())
+        self._save_config(config)
+        return config
+
+    def _save_config(self, config):
+        """Saves the configuration dictionary to disk."""
         try:
-            with open(id_file, 'w') as f:
-                f.write(new_id)
-            # Make it hidden on windows if running via subprocess but purely writing is enough
-        except:
+            with open(self.config_file, 'w') as f:
+                json.dump(config, f)
+        except Exception:
             pass
-        return new_id
+
+    def is_warning_accepted(self):
+        """Returns True if the user has accepted the startup warning."""
+        return self.config.get("accepted_warning", False)
+
+    def accept_warning(self):
+        """Marks the startup warning as accepted and saves to disk."""
+        self.config["accepted_warning"] = True
+        self._save_config(self.config)
+
+    def is_root_warning_accepted(self):
+        """Returns True if the user has accepted the rooting warning."""
+        return self.config.get("root_warning_accepted", False)
+
+    def accept_root_warning(self):
+        """Marks the rooting warning as accepted and saves to disk."""
+        self.config["root_warning_accepted"] = True
+        self._save_config(self.config)
 
     def log_event(self, event_name, params=None):
         def _send():

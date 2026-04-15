@@ -60,7 +60,7 @@ class ImageManager:
         os.makedirs(work_folder)
 
         # Run unpackbootimg
-        cmd = self._get_tool_cmd('unpack_bootimg') + ["-i", image_path, "-o", work_folder]
+        cmd = self._get_tool_cmd('unpackbootimg') + ["-i", image_path, "-o", work_folder]
         
         if callback: callback(f"Executing: {' '.join(cmd)}")
         process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, cwd=self.base_path)
@@ -400,7 +400,7 @@ class ImageManager:
              if not os.path.exists(image_path):
                  return "Error: Image not found."
 
-        cmd = self._get_tool_cmd('unpack_bootimg') + ["-i", image_path, "--info"]
+        cmd = self._get_tool_cmd('unpackbootimg') + ["-i", image_path, "--info"]
         try:
             result = subprocess.check_output(cmd, stderr=subprocess.STDOUT, text=True)
             # Filter output

@@ -8,7 +8,7 @@ import subprocess
 import shutil
 from PyQt6.QtCore import QThread, pyqtSignal
 
-CURRENT_VERSION = "1.1"
+CURRENT_VERSION = "1.2"
 UPDATE_JSON_URL = "https://raw.githubusercontent.com/Haris16-code/Bootly/refs/heads/main/data/updates/update.json"
 
 def is_binary():
