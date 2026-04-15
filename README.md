@@ -2,7 +2,7 @@
 
 Bootly is a modern, professional toolkit for managing, unpacking, and repacking Android boot and recovery images. It features a high-fidelity glassmorphism GUI, smart workspace exploration, and a suite of developer-focused tools built on PyQt6.
 
-![Bootly Mockup](https://github.com/Haris16-code/Bootly/blob/main/data/bootly_gui_mockup_1774961494950.png)
+![Bootly Mockup](https://github.com/Haris16-code/Bootly/blob/main/data/bootly-mockup.PNG?raw=true)
 
 ## ✨ Features
 - **Unpack & Repack Boot Image**: Seamlessly single-click extract and rebuild Android boot/recovery images into clean directories.
